@@ -31,7 +31,14 @@ public class P4_GoogleSearch {
 
         //5- Verify title:
         //Expected: Title should start with “apple” word
+        String expectedTitle = "apple - Google Search";
+        String actualTitle = driver.getTitle();
 
+        if(actualTitle.equals(expectedTitle)){
+            System.out.println("Search title verification Passed");
+        }else{
+            System.out.println("Search title verification Failed");
+        }
 
 
 
