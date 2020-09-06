@@ -24,6 +24,17 @@ public class P2_ZeroBankVerification {
 
 //        4. Verify link href attribute value contains:
 //        Expected: “index.html”
+        String expectedInHref = "index.html";
+        String actualHrefValue =  zeroBankLinkTopLeft.getAttribute("href");
+
+        //System.out.println("expectedInHref = " + expectedInHref);
+        //System.out.println("actualHrefValue = " + actualHrefValue);
+
+        if (actualHrefValue.contains(expectedInHref)){
+            System.out.println("Href value verification PASSED!");
+        }else{
+            System.out.println("Href value verification FAILED!!!");
+        }
 
 
 
