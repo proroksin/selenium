@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 public class P3_Amazon_cssSelector {
 
     public static void main(String[] args) {
-        //TC #3: Amazon link number verification
+        //TC #3: Amazon link number verification h
         // 1. Open Chrome browser
         // 2. Go to https://www.amazon.com
         WebDriver driver = WebDriverFactory.getDriver("chrome");
