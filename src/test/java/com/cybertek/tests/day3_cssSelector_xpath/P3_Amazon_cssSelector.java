@@ -11,7 +11,7 @@ public class P3_Amazon_cssSelector {
     public static void main(String[] args) {
         //TC #3: Amazon link number verification h
         // 1. Open Chrome browser
-        // 2. Go to https://www.amazon.com
+        // 2. Go to https://www.amazon.com  jjjk
         WebDriver driver = WebDriverFactory.getDriver("chrome");
         driver.get("https://www.amazon.com");
 
