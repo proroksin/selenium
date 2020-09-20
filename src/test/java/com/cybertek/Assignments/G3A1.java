@@ -18,7 +18,7 @@ public class G3A1 {
         driver.manage().window().maximize();
         driver.findElement(By.id("prependedInput")).sendKeys("user165");
         driver.findElement(By.id("prependedInput2")).sendKeys("UserUser123" + Keys.ENTER);
-        System.out.println(driver.getTitle());
+
         String expectedTitle = "Dashboard";
         String actualTitle = driver.getTitle();
         if (actualTitle.equals(expectedTitle)) {
