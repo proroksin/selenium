@@ -1,4 +1,5 @@
 package com.cybertek.tests.day6_dropdown_review_javafaker;
+
 import com.cybertek.utilities.SmartBearUtilitys;
 import com.cybertek.utilities.WebDriverFactory;
 import com.github.javafaker.Faker;
@@ -7,11 +8,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 public class SmartBearTest {
     WebDriver driver;
 
@@ -26,24 +29,11 @@ public class SmartBearTest {
         driver.get("http://secure.smartbearsoftware.com/samples/testcomplete12/WebOrders/login.aspx");
 
         SmartBearUtilitys.loginToSmartBear(driver);
-
     }
 
 
     @Test
     public void task1_login_page_links_print_test(){
-        //Enter username : "Tester"
-        WebElement usernameInput = driver.findElement(By.id("ctl00_MainContent_username"));
-        usernameInput.sendKeys("Tester");
-
-        //4. Enter password: "test"
-        WebElement passwordInput = driver.findElement(By.id("ctl00_MainContent_password"));
-        passwordInput.sendKeys("test");
-
-        //5.Click to Log in BUTTON
-        WebElement loginButton = driver.findElement(By.id("ctl00_MainContent_login_button"));
-        loginButton.click();
-
         //6. Print out count of all the links on landing page
         List<WebElement> allLinks = driver.findElements(By.xpath("//body//a"));
 
@@ -52,26 +42,31 @@ public class SmartBearTest {
         //7. Print out each link text on this page
 
         for(WebElement eachLink : allLinks){
-            System.out.println("each link = "+ eachLink.getText());
+            System.out.println("eachLink = " + eachLink.getText());
         }
 
     }
 
     @Test
-    public void task2_create_order_with_javafaker(){
+    public void task2_create_order_with_javafaker() throws InterruptedException {
         //6. Click on Order
         WebElement orderLink = driver.findElement(By.xpath("//a[.='Order']"));
         orderLink.click();
 
         //7. Select familyAlbum from product, set quantity to 2
-        Select productDropDown = new Select(driver.findElement(By.id("ctl00_MainContent_fmwOrder_ddlProduct")));
-        productDropDown.selectByVisibleText("FamilyAlbum");
+        Select productDropdown = new Select(driver.findElement(By.id("ctl00_MainContent_fmwOrder_ddlProduct")));
+        productDropdown.selectByVisibleText("FamilyAlbum");
 
         WebElement quantityInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_txtQuantity"));
-        quantityInput.sendKeys(Keys.BACK_SPACE + "2");
+        //quantityInput.clear();
+        Thread.sleep(1000);
+        quantityInput.sendKeys(Keys.BACK_SPACE );
 
-        //8. Click to "Calculate" button
-        WebElement calculateButton = driver.findElement(By.xpath("/input[@value=‘Calculate’]"));
+        Thread.sleep(1000);
+        quantityInput.sendKeys("2");
+
+        //8. Click to “Calculate” button
+        WebElement calculateButton = driver.findElement(By.xpath("//input[@value='Calculate']"));
         calculateButton.click();
 
         //locating all of the web elements using id
@@ -92,14 +87,23 @@ public class SmartBearTest {
 
         stateInput.sendKeys(faker.address().state());
 
-        zipInput.sendKeys(faker.address().zipCode());
+        zipInput.sendKeys(faker.address().zipCode().replaceAll("-",""));
 
-        //10. Click on "visa" radio button
+        //10. Click on “visa” radio button
+        WebElement visaRadio = driver.findElement(By.id("ctl00_MainContent_fmwOrder_cardList_0"));
+        visaRadio.click();
+
         //11. Generate card number using JavaFaker
-        //12. Click on "Process"
-        //13.Verify success message "New order has been successfully added."
+        WebElement creditCardInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox6"));
+        creditCardInput.sendKeys(faker.finance().creditCard().replaceAll("-",""));
+
+        //12. Click on “Process”
+        WebElement processButton = driver.findElement(By.id("ctl00_MainContent_fmwOrder_InsertButton"));
+        processButton.click();
+
+        //13.Verify success message “New order has been successfully added.” is displayed
+        WebElement successMessage  = (WebElement) driver.findElements(By.xpath("//strong"));
+        Assert.assertTrue(successMessage.isDisplayed(),"Success message");
+
     }
-
-
-
 }
