@@ -1,7 +1,12 @@
 package com.cybertek.tests.day6_dropdown_review_javafaker;
+import com.cybertek.utilities.SmartBearUtilitys;
+import com.cybertek.utilities.WebDriverFactory;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,6 +24,9 @@ public class SmartBearTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //get the page
         driver.get("http://secure.smartbearsoftware.com/samples/testcomplete12/WebOrders/login.aspx");
+
+        SmartBearUtilitys.loginToSmartBear(driver);
+
     }
 
 
@@ -48,5 +56,50 @@ public class SmartBearTest {
         }
 
     }
+
+    @Test
+    public void task2_create_order_with_javafaker(){
+        //6. Click on Order
+        WebElement orderLink = driver.findElement(By.xpath("//a[.='Order']"));
+        orderLink.click();
+
+        //7. Select familyAlbum from product, set quantity to 2
+        Select productDropDown = new Select(driver.findElement(By.id("ctl00_MainContent_fmwOrder_ddlProduct")));
+        productDropDown.selectByVisibleText("FamilyAlbum");
+
+        WebElement quantityInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_txtQuantity"));
+        quantityInput.sendKeys(Keys.BACK_SPACE + "2");
+
+        //8. Click to "Calculate" button
+        WebElement calculateButton = driver.findElement(By.xpath("/input[@value=‘Calculate’]"));
+        calculateButton.click();
+
+        //locating all of the web elements using id
+        WebElement nameInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_txtName"));
+        WebElement streetInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox2"));
+        WebElement cityInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox3"));
+        WebElement stateInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox4"));
+        WebElement zipInput = driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox5"));
+
+        //9. Fill address Info with JavaFaker
+        Faker faker = new Faker();
+        //• Generate: name, street, city, state, zip code
+        nameInput.sendKeys(faker.name().fullName());
+
+        streetInput.sendKeys(faker.address().streetAddress());
+
+        cityInput.sendKeys(faker.address().city());
+
+        stateInput.sendKeys(faker.address().state());
+
+        zipInput.sendKeys(faker.address().zipCode());
+
+        //10. Click on "visa" radio button
+        //11. Generate card number using JavaFaker
+        //12. Click on "Process"
+        //13.Verify success message "New order has been successfully added."
+    }
+
+
 
 }
