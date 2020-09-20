@@ -6,9 +6,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.cybertek.utilities.WebDriverFactory;
-import org.openqa.selenium.WebDriver;
-
 public class G3A1 {
 
     public static void main(String[] args) {
