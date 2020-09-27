@@ -49,13 +49,14 @@ public class SmartBearUtilities {
         //List<WebElement> namesList = driver.findElements(By.xpath("//tr/td[2]"));
 
         for (WebElement each : namesList) {
+
             if(each.getText().equals(name)){
                 Assert.assertTrue(true);
                 return;
             }
         }
-
-        Assert.fail("Name does not exist in the list");
+        //assert fail will fail the test whet its called no matter what
+        Assert.fail("Name does not exist in the list! Verification FAILED");
 
 
     }
