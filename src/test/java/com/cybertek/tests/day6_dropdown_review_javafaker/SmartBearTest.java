@@ -1,6 +1,6 @@
 package com.cybertek.tests.day6_dropdown_review_javafaker;
 
-import com.cybertek.utilities.SmartBearUtilitys;
+import com.cybertek.utilities.SmartBearUtilities;
 import com.cybertek.utilities.WebDriverFactory;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
@@ -28,7 +28,7 @@ public class SmartBearTest {
         //get the page
         driver.get("http://secure.smartbearsoftware.com/samples/testcomplete12/WebOrders/login.aspx");
 
-        SmartBearUtilitys.loginToSmartBear(driver);
+        SmartBearUtilities.loginToSmartBear(driver);
     }
 
 
