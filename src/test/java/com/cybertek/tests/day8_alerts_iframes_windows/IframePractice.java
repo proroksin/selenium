@@ -51,9 +51,11 @@ public class IframePractice {
 
         //5. Assert: "An iFrame containing the TinyMCE WYSIWYG Editor"
         driver.switchTo().defaultContent();
-        driver.switchTo().parentFrame();
+        //driver.switchTo().parentFrame();
 
         WebElement headerText = driver.findElement(By.xpath("//h3"));
+
+        Assert.assertTrue(headerText.isDisplayed(),"Header text is not displayed. Verification FAILED!");
 
 
 
