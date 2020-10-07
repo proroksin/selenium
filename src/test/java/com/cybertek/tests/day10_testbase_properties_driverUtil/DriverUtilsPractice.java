@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DriverUtilsPractice {
+
     @Test
     public void simple_google_search_test(){
         //Driver.getDriver() = driver
