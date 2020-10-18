@@ -3,7 +3,10 @@ package com.cybertek.tests.day13_pom_synchronization;
 import com.cybertek.pages.Loading7Page;
 import com.cybertek.utilities.Driver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Synchronization_Practices {
@@ -24,5 +27,11 @@ public class Synchronization_Practices {
 
         //using WebDriverWait to create explicit wait until title changes
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+
+        //we need to use the object 'wait' to SETUP OUR EXPECTED CONDITION
+        wait.until(ExpectedConditions.titleIs("Dynamic Title"));
+
+        //assert that message is displayed
+        Assert.assertTrue(loading7Page.doneMessage.isDisplayed());
     }
 }
